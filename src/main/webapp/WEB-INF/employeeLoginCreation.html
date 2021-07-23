@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Login Form</title>
+</head>
+<body>
+    <h1>Employee Registration</h1>
+    <h3>Date: <input type='date'/></h3>
+</br>
+
+<form action=''>
+    <table align="center" cellpadding = "10">
+        <tr>
+        <th>First Name:</th>
+        <td><input type = "text" name="FirstName" maxlength="30"/></td>
+        </tr>
+        <tr>
+            <th>Last Name:</th>
+            <td><input type = "text" name="LastName" maxlength="30"/></td>
+        </tr>
+        <tr>
+            <th>Date of Birth</th>
+            <td><select name="Date" id="date">
+                <option value="-1">Day:</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                </select>
+                <select name="Month" id="month">
+                    <option value="-1">Month:</option>
+                    <option value="1">Jan</option>
+                    <option value="2">Feb</option>
+                    <option value="3">Mar</option>
+                </select>
+                <select name="Year" id="year">
+                    <option value="-1">Year:</option>
+                    <option value="1">1992</option>
+                    <option value="2">1993</option>
+                    <option value="3">1994</option>
+                </select>
+            </td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><input type='email' name='Email' id='email'/></td>
+            </tr>
+            <tr>
+                <th>Mobile Number</th>
+                <td><input type='number' name='Number' id='number' maxlength="10"/></td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>Male<input type='radio' name='Gender' id='gender' value='Male'/>
+                    Female<input type='radio' name='Gender' id='gender' value='Female'/>
+                </td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td><textarea name='Address' id='address' rows="4" cols="30"></textarea></td>
+            </tr>
+            <tr>
+                <th>Hobbies</th>
+                <td>Drawing<input type="checkbox" name='Hobby_Drawing' value="drawing" />
+                Singing<input type="checkbox" name='Hobby_Singing' value="singing" />
+                Dancing<input type="checkbox" name='Hobby_Dancing' value="dancing" />
+                Sketching<input type="checkbox" name='Hobby_Sketching' value="sketching" />
+                </br> </br>
+                Others: <input type="text" name='Hobby_Others' maxlength="20"/>
+                </td>
+            </tr>
+            <th>Qualification: </th>
+            <td><table align="center" cellpadding="5"><tr>
+                <th>SI.No.</th> 
+                <th>Examination</th>
+                <th>Board</th>
+                <th>Percentage</th>
+                <th>Year of Passing</th></tr>
+                    <tr>
+                        <th>1:</th>
+                        <th>Class X</th>
+                        <th><input type="text"/></th>
+                        <th><input type="text"/></th>
+                        <th><input type="text"/></th>
+                    </tr>
+                    <tr>
+                        <th>2:</th>
+                        <th>Class XII</th>
+                        <th><input type="text"/></th>
+                        <th><input type="text"/></th>
+                        <th><input type="text"/></th>
+                    </tr>
+                    <tr>
+                        <th>3:</th>
+                        <th>Graduation</th>
+                        <th><input type="text"/></th>
+                        <th><input type="text"/></th>
+                        <th><input type="text"/></th>
+                    </tr>
+                    <tr>
+                        <th>4:</th>
+                        <th>Masters</th>
+                        <th><input type="text"/></th> 
+                        <th><input type="text"/></th>
+                        <th><input type="text"/></th>
+                    </tr>
+                    </table>
+                    
+                    <tr>
+                        <th>Courses<br /> APPLIED FOR:</th>
+                        <td>
+                        BCA <input type="radio" name="Course_BCA" value="BCA"/>
+
+                        B.Com <input type="radio" name="Course_BCA" value="BCA"/>
+                        
+                        B.SC <input type="radio" name="Course_BCA" value="BCA"/>
+                    
+                        B.BA <input type="radio" name="Course_BCA" value="BCA"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align='center'>
+                            <input type='submit' value='Submit'/>
+                            <input type='reset' value='Reset'>
+                        </td>
+                    </tr>
+                </table>
+</form>
+
+<ul>
+    <li>Please submit form</li>
+    <li>Can't resubmit form</li>
+</ul>
+<ol>
+    <li>Please sumbit form</li>
+    <li>Can't submit</li>
+</ol>
+</body>
+

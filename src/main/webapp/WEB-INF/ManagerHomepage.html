@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Manager Homepage</title>
+</head>
+<body>
+<h1>Manager homepage</h1>
+<h2>Manager information: </h2>
+<div></div>
+<h3>Claim Requests: Pending</h3>
+<div><button id="getPendingRequests" type="button">
+<div id ="pendingRequests">
+Get pending requests
+</div>
+</button></div>
+<h4>Claim Requests: Approved</h4>
+<div><button id="getApprovedRequests" type="button">
+<div id="approvedRequests">
+Get approved requests
+</div>
+</button></div>
+<h5>All Employees</h5>
+<div><button id="getAllEmployees" type="button">
+<div id="allEmployees">
+Get All Employees
+</div></button>
+</div>
+<h5>EmployeeNo Claim Requests</h5>
+<form action="claimByEmployeeNo" id="getClaimByEmployeeNo">
+Get Claims By Employee Number: 
+<input type="text" name="empNo" placeholder="Employee Number" id="empNo">
+<input type="submit" value="Find Claims">
+</form>
+<div id="claimsByEmployeeNo">
+</div>
+<footer>
+Logout
+<form action="check" method="post">
+<input type="submit" value="logout">
+</form>
+</footer>
+<script type="text/javascript">
+let pendingButton = document.querySelector("#getPendingRequests");
+pendingButton.addEventListener('click', () => getPendingClaims());
+
+let approvedButton = document.querySelector("#getApprovedRequests");
+approvedButton.addEventListener('click', () => getApprovedClaims());
+
+let allEmployeesButton = document.querySelector("#getAllEmployees");
+allEmployeesButton.addEventListener('click', () => {
+	fetch('http://localhost:8080/Project1/allEmployees')
+		.then(resp => resp.text())
+		.then(text => {
+			let element = document.querySelector('#allEmployees');
+			element.innerText = text;
+		});
+});
+
+let findClaimByEmployeeNo = document.querySelector("#getClaimByEmployeeNo");
+findClaimByEmployeeNo.addEventListener('submit', (e) => { 
+	e.preventDefault();
+	let empNo = document.querySelector('#empNo').value;
+	console.log(empNo);
+	findClaimsByEmployeeNo(empNo);
+});
+
+/* {
+	fetch('http://localhost:8080/Project1/allPendingClaims')
+		.then(resp => resp.json())
+		.then(json => {
+			let container = document.querySelector('#pendingRequests');	
+			json.forEach(e => {
+				let element = document.createElement('p');
+				let approve = document.createElement('button');
+				approve.setAttribute('id','approveButton');
+/* 				approve.addEventListener('click', () => approval() .then), false);
+ */		/* 		let deny = document.createElement('button');
+				element.innerText = `ClaimNo: ${e.remNo} EmployeeNo: ${e.empNo} Activity: ${e.remActivity} Amount: ${e.remAmount}
+				Manager: ${e.remManager}`
+				container.appendChild(element);
+				container.appendChild(approve);
+				container.appendChild(deny);
+			})
+		}); 
+}); */ 
+async function findClaimsByEmployeeNo(empNo) {
+		
+		await fetch('http://localhost:8080/Project1/claimByEmployeeNo', {
+			method: "post",
+			body: empNo
+		})
+		.then(resp => resp.text())
+		.then(text => {
+			let element = document.querySelector('#claimsByEmployeeNo');
+			element.innerText = text;
+		});
+
+	
+}
+
+async function approval(remNo) {
+	remNo = remNo.innerText;
+	console.log(remNo);
+	
+/* 	await fetch('http://localhost:8080/Project1/approveClaim' + remNo);
+ */ 
+ 	await fetch('http://localhost:8080/Project1/approveClaim', {
+ 			method: "post",
+ 			body: remNo
+ 	}); 
+ 	getApprovedClaims();
+	
+	}
+	
+async function denial(remNo) {
+	remNo = remNo.innerText;
+	console.log(remNo);
+	
+ 	await fetch('http://localhost:8080/Project1/denyClaim', {
+ 			method: "post",
+ 			body: remNo
+ 	}); 
+}
+
+async function getApprovedClaims() {
+	fetch('http://localhost:8080/Project1/allApprovedClaims')
+	.then(resp => resp.json())
+	.then(json => {
+		let container = document.querySelector('#approvedRequests');
+		while (container.firstChild) {
+			container.removeChild(container.firstChild)
+		}
+		json.forEach(e => {
+			let element = document.createElement('p');
+			element.innerText = `ClaimNo: ${e.remNo} EmployeeNo: ${e.empNo} Activity: ${e.remActivity} Amount: ${e.remAmount}
+			Manager: ${e.remManager}`
+			container.appendChild(element);
+		})
+	}); 
+
+
+}
+	
+async function getPendingClaims() {
+	await fetch('http://localhost:8080/Project1/allPendingClaims')
+	.then(resp => resp.json())
+	.then(json => {
+		let container = document.querySelector('#pendingRequests');
+		while (container.firstChild) {
+			container.removeChild(container.firstChild);
+		}
+		json.forEach(e => {
+			let element = document.createElement('p');
+			let remNo = document.createElement('span');
+			remNo.innerText = `${e.remNo}`;
+			let approve = document.createElement('button');
+			approve.setAttribute('id','approveButton');
+			approve.addEventListener('click', () => approval(remNo).then(getPendingClaims()), false);
+			let deny = document.createElement('button');
+			deny.setAttribute('id','denyButton');
+			deny.addEventListener('click', () => denial(remNo).then(getPendingClaims()), false);
+			element.innerText = `ClaimNo: ${e.remNo} EmployeeNo: ${e.empNo} Activity: ${e.remActivity} Amount: ${e.remAmount}
+			Manager: ${e.remManager}`
+			container.appendChild(element);
+			element.appendChild(approve);
+			element.appendChild(deny);
+	})
+}); 
+	
+	function logout() {
+		fetch('http://localhost:8080/Project1/');
+	}
+}
+
+</script>
+</body>
+</html>
